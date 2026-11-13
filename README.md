@@ -1,4 +1,13 @@
-# py3umk
-for my class
+# Molecular Beam Characterization by REMPI UV Pulse Laser
 
-here is an update
+Resonance-Enhanced Multi-Photon Ionization (REMPI) spectroscopy provides a powerful approach for sensitive quantum state-selective detection of molecules 
+
+![Schematic of Molecular Beam Characterization](schematic.png)
+
+'''math
+E = mc^2
+'''
+
+
+
+
