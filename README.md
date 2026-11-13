@@ -4,9 +4,9 @@ Resonance-Enhanced Multi-Photon Ionization (REMPI) spectroscopy provides a power
 
 ![Schematic of Molecular Beam Characterization](schematic.png)
 
-'''math
+```math
 E = mc^2
-'''
+```
 
 
 
