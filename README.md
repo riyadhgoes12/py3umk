@@ -12,17 +12,26 @@ Below is the schematic of generating $[2+1]$ REMPI in this PhD Project:
 
 Implement a phyton code for data processing and spectral analysis toolkit for high-resolution $[2+1]$ REMPI laser spectroscopy of molecular hydrogen ($\text{H}_2$). It takes large batches of raw oscilloscope `.txt` recordings where each file contains of wavelength stepped in time-domain points and automates pulse extraction, baseline normalization, spectral integration, and Gaussian/Lorentzian lineshape fitting to extract Full Width at Half Maximum ($\text{FWHM}$) across varying $\text{H}_2$ pressures and UV laser powers.
 
+This is the code structure
+
+py3umk/
+├── iop3umk.py          # I/O routines for .txt files and .npy checkpoints
+├── analysis.py         # Pulse normalization, area integration, and FWHM fitting
+├── examples/           # Example scripts for pressure and UV power comparisons
+├── docs/figures/       # Output plots and spectral fit figures
+└── README.md
+
 ## Processing Pipeline
 
 1. **Batch Ingestion & Sorting:** Reads multirow oscilloscope `.txt` files and sorts individual pulses.
 2. **Baseline Subtraction:** Removes DC baseline offset per trace and normalizes pulse amplitudes prior to integration.
 3. **Pulse Integration:** Integrates the normalized pulse signal over the arrival time window at each wavelength step to construct the $[2+1]$ REMPI spectrum:
-   $$I(\lambda) = \int_{t_1}^{t_2} S_{\text{norm}}(t, \lambda) \, dt$$
+	$$I(\lambda) = \int_{t_1}^{t_2} S_{\text{norm}}(t, \lambda) \, dt$$
 4. **Lineshape Fitting & FWHM Extraction:** Isolates the narrowest spectral transition and fits both Gaussian and Lorentzian profiles to determine pressure broadening and AC Stark / power broadening:
    - **Gaussian profile:**
-     $$G(\lambda; A, \lambda_0, \sigma) = A \exp\left( -\frac{(\lambda - \lambda_0)^2}{2\sigma^2} \right), \quad \text{FWHM}_G = 2\sqrt{2\ln 2}\,\sigma$$
+	$$G(\lambda; A, \lambda_0, \sigma) = A \exp\left( -\frac{(\lambda - \lambda_0)^2}{2\sigma^2} \right), \quad \text{FWHM}_G = 2\sqrt{2\ln 2}\,\sigma$$
    - **Lorentzian profile:**
-     $$L(\lambda; A, \lambda_0, \gamma) = \frac{A}{\pi} \frac{\gamma}{(\lambda - \lambda_0)^2 + \gamma^2}, \quad \text{FWHM}_L = 2\gamma$$
+	$$L(\lambda; A, \lambda_0, \gamma) = \frac{A}{\pi} \frac{\gamma}{(\lambda - \lambda_0)^2 + \gamma^2}, \quad \text{FWHM}_L = 2\gamma$$
 5. **Comparative Parameter Analysis:** Compares extracted $\text{FWHM}$ and line shifts across datasets recorded at different $\text{H}_2$ chamber pressures and UV pulse powers.
 
 ## Installation
@@ -34,7 +43,3 @@ git clone [https://github.com/riyadhgoes12/py3umk.git](https://github.com/riyadh
 cd py3umk
 pip install numpy scipy matplotlib
 ```
-
-
-
-
